@@ -28,27 +28,22 @@ using namespace std;
         float IMDb;
         void Read(ifstream &file)
         {
-            getline (file, Film.Title);
-            file.ignore(255, \n);
-            getline (file, Film.Author);
-            file.ignore(255, \n);
-            getline (file, Film.Genre);
-            file.ignore(255, \n);
-            file >> Film.Year;
-            file.ignore(255, \n);
-            file >> Film.Duration;
-            file.ignore(255, \n);
-            file >> Film.IMDb;
-            file.ignore(255, \n);
+            getline (file, Title);
+            getline (file, Author);
+            getline (file, Genre);
+            file >> Year;
+            file >> Duration;
+            file >> IMDb;
+            file.get();
         };
         void Write()
         {
-            cout << setw(15) << left << Film.Title;
-            cout << setw(15) << left << Film.Author;
-            cout << setw(10) << left << Film.Genre;
-            cout << setw(6) << left << Film.Year;
-            cout << setw(5) << left << Film.Duration;
-            cout << setw(5) << left << Film.IMDb;
+            cout << Title;
+            cout << Author;
+            cout << Genre;
+            cout << Year;
+            cout << Duration;
+            cout << IMDb;
         };
 
     };
@@ -57,11 +52,11 @@ using namespace std;
     {
         cout << "Enter genre: ";
         string genre;
-        cin >> genre;
+        getline (cin, genre);
         cout << "Enter rating: ";
         float rating;
         cin >> rating;
-        film_count = 0;
+        int film_count = 0;
         for (int i = 0; i < NUMBER; i++)
         {
             if ((move[i].Genre == genre) && (move[i].IMDb >= rating))
@@ -71,7 +66,7 @@ using namespace std;
             }
         }
         if (film_count == 0)
-            cout << "This films didn't found"
+            cout << "This films didn't found" << endl;
     }
 
 
@@ -79,12 +74,22 @@ using namespace std;
     {
         cout << "Enter author: ";
         string author;
-        cin >> author;
-        int year
+        getline (cin, author);
+        int year = -1;
+        int film_count = -1;
         for (int i = 0; i < NUMBER; i++)
         {
-            if
+            if ((move[i].Author == author) && (move[i].Year >= year))
+            {
+                film_count = i;
+                year = move[i].Year;
+            }
+
         }
+        if (film_count >= 0)
+            move[film_count].Write();
+        else
+            cout << "Didn't found author" << endl;
     }
 
 
@@ -105,11 +110,11 @@ int main()
         file >> NUMBER;
         Film *move = new Film[NUMBER];
         for (int i = 0; i < NUMBER; i++)
-            move[i].Read();
+            move[i].Read(file);
         file.close();
         Search_latest_film_of_author (move, NUMBER);
         Search_good_film (move, NUMBER);
-        delete Film[];
+        delete[] move;
         return 0;
     }
 }
