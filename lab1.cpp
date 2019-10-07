@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <fstream>
+#include <iomanip>
 
 
 // #include <>
@@ -28,22 +29,28 @@ using namespace std;
         float IMDb;
         void Read(ifstream &file)
         {
-            getline (file, Title);
+            getline(file, Title);
+            //file >> Title;
+            //file.ignore(255, '\n');
             getline (file, Author);
-            getline (file, Genre);
+            file >> Genre;
+            //getline (file, Genre);
+            file.ignore(255, '\n');
             file >> Year;
+            file.ignore(255, '\n');
             file >> Duration;
+            file.ignore(255, '\n');
             file >> IMDb;
-            file.get();
+            file.ignore(255, '\n');
         };
         void Write()
         {
-            cout << Title;
-            cout << Author;
-            cout << Genre;
-            cout << Year;
-            cout << Duration;
-            cout << IMDb;
+            cout << setw(20) << left << Title;
+            cout << setw(20) << left << Author;
+            cout << setw(15) << left << Genre;
+            cout << setw(10) << left << Year;
+            cout << setw(6) << left << Duration;
+            cout << setw(5) << left << IMDb << endl;
         };
 
     };
@@ -108,10 +115,13 @@ int main()
     {
 
         file >> NUMBER;
+        file.get();
         Film *move = new Film[NUMBER];
         for (int i = 0; i < NUMBER; i++)
             move[i].Read(file);
         file.close();
+        for (int i = 0; i < NUMBER; i++)
+            move[i].Write();
         Search_latest_film_of_author (move, NUMBER);
         Search_good_film (move, NUMBER);
         delete[] move;
