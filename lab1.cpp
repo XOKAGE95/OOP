@@ -20,13 +20,15 @@
 using namespace std;
 
     class Film
-    {   public:
+    {
+        private:
         string Title;
         string Author;
         string Genre;
         int Year;
         int Duration;
         float IMDb;
+        public:
         void Read(ifstream &file)
         {
             getline(file, Title);
@@ -52,6 +54,24 @@ using namespace std;
             cout << setw(6) << left << Duration;
             cout << setw(5) << left << IMDb << endl;
         };
+        string get_Genre()
+        {
+            return Genre;
+        };
+        float get_IMDb()
+        {
+            return IMDb;
+        };
+        string get_Author()
+        {
+            return Author;
+        };
+        int get_Year()
+        {
+            return Year;
+        };
+
+
 
     };
 
@@ -66,7 +86,7 @@ using namespace std;
         int film_count = 0;
         for (int i = 0; i < NUMBER; i++)
         {
-            if ((move[i].Genre == genre) && (move[i].IMDb >= rating))
+            if ((move[i].get_Genre() == genre) && (move[i].get_IMDb() >= rating))
             {
                 film_count++;
                 move[i].Write();
@@ -86,10 +106,10 @@ using namespace std;
         int film_count = -1;
         for (int i = 0; i < NUMBER; i++)
         {
-            if ((move[i].Author == author) && (move[i].Year >= year))
+            if ((move[i].get_Author() == author) && (move[i].get_Year() >= year))
             {
                 film_count = i;
-                year = move[i].Year;
+                year = move[i].get_Year();
             }
 
         }
