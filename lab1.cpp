@@ -4,120 +4,57 @@
 #include <cstring>
 #include <fstream>
 #include <iomanip>
-
-
-// #include <>
-/*
-	Название
-	Автор
-	Жанр
-	Длительность
-	Год
-	Рейтинг
-
-*/
+#include <string>
+#include "Film.h"
+#include "Film.cpp"
 
 using namespace std;
 
-    class Film
+
+
+void Search_good_film (Film *move, int NUMBER)
+{
+    cout << "Enter genre: ";
+    string genre;
+    getline (cin, genre);
+    cout << "Enter rating: ";
+    float rating;
+    cin >> rating;
+    int film_count = 0;
+    for (int i = 0; i < NUMBER; i++)
     {
-        private:
-        string Title;
-        string Author;
-        string Genre;
-        int Year;
-        int Duration;
-        float IMDb;
-        public:
-        void Read(ifstream &file)
+        if ((move[i].get_Genre() == genre) && (move[i].get_IMDb() >= rating))
         {
-            getline(file, Title);
-            //file >> Title;
-            //file.ignore(255, '\n');
-            getline (file, Author);
-            file >> Genre;
-            //getline (file, Genre);
-            file.ignore(255, '\n');
-            file >> Year;
-            file.ignore(255, '\n');
-            file >> Duration;
-            file.ignore(255, '\n');
-            file >> IMDb;
-            file.ignore(255, '\n');
-        };
-        void Write()
-        {
-            cout << setw(20) << left << Title;
-            cout << setw(20) << left << Author;
-            cout << setw(15) << left << Genre;
-            cout << setw(10) << left << Year;
-            cout << setw(6) << left << Duration;
-            cout << setw(5) << left << IMDb << endl;
-        };
-        string get_Genre()
-        {
-            return Genre;
-        };
-        float get_IMDb()
-        {
-            return IMDb;
-        };
-        string get_Author()
-        {
-            return Author;
-        };
-        int get_Year()
-        {
-            return Year;
-        };
-
-
-
-    };
-
-    void Search_good_film (Film *move, int NUMBER)
-    {
-        cout << "Enter genre: ";
-        string genre;
-        getline (cin, genre);
-        cout << "Enter rating: ";
-        float rating;
-        cin >> rating;
-        int film_count = 0;
-        for (int i = 0; i < NUMBER; i++)
-        {
-            if ((move[i].get_Genre() == genre) && (move[i].get_IMDb() >= rating))
-            {
-                film_count++;
-                move[i].Write();
-            }
+            film_count++;
+            move[i].Write_console();
         }
-        if (film_count == 0)
-            cout << "This films didn't found" << endl;
     }
+    if (film_count == 0)
+        cout << "This films didn't found" << endl;
+}
 
 
-    void Search_latest_film_of_author (Film *move, int NUMBER)
+void Search_latest_film_of_author (Film *move, int NUMBER)
+{
+    cout << "Enter author: ";
+    string author;
+    getline (cin, author);
+    int year = -1;
+    int film_count = -1;
+    for (int i = 0; i < NUMBER; i++)
     {
-        cout << "Enter author: ";
-        string author;
-        getline (cin, author);
-        int year = -1;
-        int film_count = -1;
-        for (int i = 0; i < NUMBER; i++)
+        if ((move[i].get_Author() == author) && (move[i].get_Year() >= year))
         {
-            if ((move[i].get_Author() == author) && (move[i].get_Year() >= year))
-            {
-                film_count = i;
-                year = move[i].get_Year();
-            }
-
+            film_count = i;
+            year = move[i].get_Year();
         }
-        if (film_count >= 0)
-            move[film_count].Write();
-        else
-            cout << "Didn't found author" << endl;
+
     }
+    if (film_count >= 0)
+        move[film_count].Write_console();
+    else
+        cout << "Didn't found author" << endl;
+}
 
 
 
@@ -138,12 +75,19 @@ int main()
         file.get();
         Film *move = new Film[NUMBER];
         for (int i = 0; i < NUMBER; i++)
-            move[i].Read(file);
+            move[i].Read_file(file);
         file.close();
+        Definition();
         for (int i = 0; i < NUMBER; i++)
-            move[i].Write();
+            move[i].Write_console();
         Search_latest_film_of_author (move, NUMBER);
         Search_good_film (move, NUMBER);
+        ofstream file;
+        file.open("FilmOUT.txt");
+        Definition_file(file);
+        for (int i = 0; i < NUMBER; i++)
+            move[i].Write_file(file);
+        file.close();
         delete[] move;
         return 0;
     }
