@@ -66,7 +66,7 @@ void Film :: Write_console()
     cout << endl;
 }
 
-void Definition()
+void Film :: Definition()
 {
     cout << setw(20) << left << "Title";
     cout << "|";
@@ -86,7 +86,7 @@ void Definition()
     cout << endl;
 }
 
-void Definition_file(ofstream &file)
+void Film :: Definition_file(ofstream &file)
 {
     file << setw(20) << left << "Title";
     file << setw(20) << left << "Author";
