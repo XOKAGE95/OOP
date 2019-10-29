@@ -13,7 +13,7 @@ void shop :: Definition()
 {
     cout << setw(20) << left << "Title";
     cout << setw(20) << left << "Author";
-    cout << setw(15) << left << "Genre";
+    cout << setw(20) << left << "Genre";
     cout << setw(10) << left << "Year";
     cout << setw(10) << left << "Duration";
     cout << setw(5) << left << "IMDb" << endl << endl << endl;
@@ -71,10 +71,9 @@ void shop :: Search_good_film ()                           // Задание 1
     int film_count = 0;
     for (int i = 0; i < film_number; i++)
     {
-        if ((moves[i].get_Genre() == genre) && (moves[i].get_IMDb() >= rating))
+        if ((moves[i].comparison_Genre(genre) != 0) && (moves[i].get_IMDb() >= rating))
         {
             film_count++;
-            Definition();
             moves[i].Write_console();
         }
     }
@@ -101,7 +100,6 @@ void shop :: Search_latest_film_of_author ()
     }
     if (film_count >= 0)
     {
-        Definition();
         moves[film_count].Write_console();
     }
     else
