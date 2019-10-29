@@ -59,11 +59,11 @@ void Film :: Read_console()
 
 void Film :: Write_file(ofstream &file)
 {
-    file << setw(20) << left << Title;
+    file << setw(30) << left << Title;
     file << setw(20) << left << Author;
-    file << setw(5) << left << genres[0];
-    file << setw(5) << left << genres[1];
-    file << setw(5) << left << genres[2];
+    file << setw(10) << left << genres[0];
+    file << setw(10) << left << genres[1];
+    file << setw(10) << left << genres[2];
     //file << setw(20) << left << Genre;
     file << setw(10) << left << Year;
     file << setw(10) << left << Duration;
@@ -72,11 +72,11 @@ void Film :: Write_file(ofstream &file)
 
 void Film :: Write_console()
 {
-    cout << setw(20) << left << Title;
+    cout << setw(30) << left << Title;
     cout << setw(20) << left <<  Author;
-    cout << setw(5) << left << genres[0] << " ";
-    cout << setw(5) << left << genres[1] << " ";
-    cout << setw(5) << left << genres[2] << " ";
+    cout << setw(10) << left << genres[0] << " ";
+    cout << setw(10) << left << genres[1] << " ";
+    cout << setw(10) << left << genres[2] << " ";
    // cout << setw(20) << left << Genre;
     cout << setw(10) << left << Year;
     cout << setw(10) << left << Duration;

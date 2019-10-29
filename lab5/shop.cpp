@@ -11,9 +11,9 @@ using namespace std;
 
 void shop :: Definition()
 {
-    cout << setw(20) << left << "Title";
+    cout << setw(30) << left << "Title";
     cout << setw(20) << left << "Author";
-    cout << setw(20) << left << "Genre";
+    cout << setw(30) << left << "Genre";
     cout << setw(10) << left << "Year";
     cout << setw(10) << left << "Duration";
     cout << setw(5) << left << "IMDb" << endl << endl << endl;
