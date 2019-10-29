@@ -15,6 +15,7 @@ private:
     string Title;
     string Author;
     string Genre;
+    string *genres;
     int Year;
     int Duration;
     float IMDb;
@@ -28,6 +29,7 @@ public:
     string get_Author();
     int get_Year();
     string get_Title();
+    int comparison_Genre(string genre);
 
 };
 #endif
