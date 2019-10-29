@@ -9,6 +9,16 @@
 #include "shop.h"
 using namespace std;
 
+void shop :: Definition()
+{
+    cout << setw(20) << left << "Title";
+    cout << setw(20) << left << "Author";
+    cout << setw(15) << left << "Genre";
+    cout << setw(10) << left << "Year";
+    cout << setw(10) << left << "Duration";
+    cout << setw(5) << left << "IMDb" << endl << endl << endl;
+}
+
 shop :: shop (unsigned int MAX) // Конструктор класса shop;
 {
     max_film_number = MAX;                                  // Максимальное количество фильмов
@@ -37,13 +47,14 @@ void shop :: add_film (string mode, ifstream &file)            // Добавле
         moves[film_number].Read_console();
         film_number ++;
     }
-    else cout << "Sorry, cant add films" << endl;
+    else
+        cout << "Sorry, cant add films" << endl;
 
 }
 
 void shop :: Display()                                      // Показ всех фильмов
 {
-        Definition ();
+    Definition ();
     for (int i = 0; i < film_number; i++)
         moves[i].Write_console();                           // Показ i фильма
 }
@@ -68,7 +79,7 @@ void shop :: Search_good_film ()                           // Задание 1
         }
     }
     if (film_count == 0)
-        cout << "This films didn't found" << endl;
+        cout << "This films didn't find" << endl;
 }
 
 
@@ -94,35 +105,32 @@ void shop :: Search_latest_film_of_author ()
         moves[film_count].Write_console();
     }
     else
-        cout << "Didn't found author" << endl;
+        cout << "Didn't find author" << endl;
 }
 
-void shop :: Definition()                   // Выводит поля в консоль
+void shop :: delete_film(string name)
 {
-    cout << setw(20) << left << "Title";
-    cout << "|";
-    cout << setw(20) << left << "Author";
-    cout << "|";
-    cout << setw(15) << left << "Genre";
-    cout << "|";
-    cout << setw(10) << left << "Year";
-    cout << "|";
-    cout << setw(10) << left << "Duration";
-    cout << "|";
-    cout << setw(5) << left << "IMDb";
-    cout << "|";
-    cout << endl;
-    for (int i = 0; i < 85; i++)
-        cout << "-";
-    cout << endl;
-}
+    int count_i = -1;
+    for (int i = 0; i < film_number && count_i == -1; i++)
+    {
+        if (moves[i].get_Title() == name)
+        {
+            count_i = i;
+        }
+    }
+    if (count_i != -1)
+    {
+        cout << "This film was delete:\n";
+        moves[count_i].Write_console();
+        for (int i= count_i; i < (film_number - 1); i++)
+        {
+            moves[i] = moves[i+1];
+            film_number --;
+        }
 
-void shop :: Definition_file(ofstream &file)        // Выводит поля в файл
-{
-    file << setw(20) << left << "Title";
-    file << setw(20) << left << "Author";
-    file << setw(15) << left << "Genre";
-    file << setw(10) << left << "Year";
-    file << setw(6) << left << "Duration";
-    file << setw(5) << left << "IMDb" << endl;
+
+
+    }
+
+    else cout << "Didn't find this film\n";
 }

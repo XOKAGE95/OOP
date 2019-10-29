@@ -49,20 +49,12 @@ void Film :: Write_file(ofstream &file)
 void Film :: Write_console()
 {
     cout << setw(20) << left << Title;
-    cout << "|";
     cout << setw(20) << left <<  Author;
-    cout << "|";
     cout << setw(15) << left << Genre;
-    cout << "|";
     cout << setw(10) << left << Year;
-    cout << "|";
     cout << setw(10) << left << Duration;
-    cout << "|";
     cout << setw(5) << left << IMDb;
-    cout << "|";
     cout << endl;
-    for (int i = 0; i < 85; i++)
-    cout << "-";
     cout << endl;
 }
 
@@ -84,4 +76,8 @@ string Film :: get_Author()
 int Film :: get_Year()
 {
     return Year;
+}
+string Film :: get_Title()
+{
+    return Title;
 }

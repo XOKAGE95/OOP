@@ -34,6 +34,21 @@ int main()
         film_store.Display();
         film_store.Search_latest_film_of_author ();
         film_store.Search_good_film ();
+        cout << "Want you delete any film?\n";
+        string ask;
+        cin >> ask;
+        while (ask == "yes")
+        {
+            cout << "Which film you want to delete?\n";
+            string name;
+            cin >> name;
+            film_store.delete_film(name);
+            cout << "Want you delete any film?\n";
+            cin >> ask;
+
+        }
+
+        film_store.Display();
 
         return 0;
     }

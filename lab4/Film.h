@@ -11,7 +11,7 @@ using namespace std;
 
 class Film
 {
-protected:
+private:
     string Title;
     string Author;
     string Genre;
@@ -27,6 +27,7 @@ public:
     float get_IMDb();
     string get_Author();
     int get_Year();
+    string get_Title();
 
 };
 #endif
