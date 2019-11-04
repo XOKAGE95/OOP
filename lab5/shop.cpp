@@ -37,15 +37,25 @@ shop :: ~shop ()                                            // Деструкт�
 
 void shop :: add_film (string mode, ifstream &file)            // Добавление 1 фильма в магазин
 {
-    if ((film_number < max_film_number) && (mode == "file"))  // Проверка на свободное место
+    if (film_number < max_film_number)  // Проверка на свободное место
     {
-        moves[film_number].Read_file(file);
-        film_number ++;                                       // Счетчик актуального фильма
-    }
-    else if ((film_number < max_film_number)  && (mode == "console"))
-    {
-        moves[film_number].Read_console();
-        film_number ++;
+        Film clip;
+        int count_f = 0;
+        if (mode == "file")
+            file >> clip;
+        else
+            cin >> clip;
+
+        for (int i = 0; i < film_number; i++)
+        {
+            if (clip != moves[i])
+                count_f ++;
+        }
+        if (count_f == film_number)
+        {
+            moves[film_number] = clip;
+            film_number ++;
+        }
     }
     else
         cout << "Sorry, cant add films" << endl;
@@ -56,7 +66,7 @@ void shop :: Display()                                      // Показ все
 {
     Definition ();
     for (int i = 0; i < film_number; i++)
-        moves[i].Write_console();                           // Показ i фильма
+        cout << moves[i];                           // Показ i фильма
 }
 
 void shop :: Search_good_film ()                           // Задание 1
@@ -74,7 +84,7 @@ void shop :: Search_good_film ()                           // Задание 1
         if ((moves[i].comparison_Genre(genre) != 0) && (moves[i].get_IMDb() >= rating))
         {
             film_count++;
-            moves[i].Write_console();
+            cout << moves[i];
         }
     }
     if (film_count == 0)
@@ -100,7 +110,7 @@ void shop :: Search_latest_film_of_author ()
     }
     if (film_count >= 0)
     {
-        moves[film_count].Write_console();
+        cout << moves[film_count];
     }
     else
         cout << "Didn't find author" << endl;
@@ -119,16 +129,18 @@ void shop :: delete_film(string name)
     if (count_i != -1)
     {
         cout << "This film was delete:\n";
-        moves[count_i].Write_console();
+        cout << moves[count_i];
         for (int i= count_i; i < (film_number - 1); i++)
         {
             moves[i] = moves[i+1];
-            film_number --;
         }
+        film_number --;
 
 
 
     }
 
-    else cout << "Didn't find this film\n";
+    else
+        cout << "Didn't find this film\n";
 }
+

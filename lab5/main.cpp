@@ -13,6 +13,16 @@
 using namespace std;
 
 
+/*
+Для своего варианта задания реализуйте операторные функции:
+ проверки двух объектов основного класса на эквивалентность (operator==),
+ вывода информации в поток ostream (operator<<),
+ ввода данных из потока istream (operator>>),
+ записи в файловый поток ofstream (operator<<),
+ чтения из файлового потока ifstream (operator>>),
+ добавления нового элемента в класс-контейнер (operator+=).
+*/
+
 int main()
 {
     int NUMBER;
@@ -36,12 +46,12 @@ int main()
         film_store.Search_good_film ();
         cout << "Want you delete any film?\n";
         string ask;
-        cin >> ask;
+        getline(cin, ask);
         while (ask == "yes")
         {
             cout << "Which film you want to delete?\n";
             string name;
-            cin >> name;
+            getline(cin, name);
             film_store.delete_film(name);
             cout << "Want you delete any film?\n";
             cin >> ask;

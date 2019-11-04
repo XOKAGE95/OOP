@@ -1,5 +1,5 @@
-#ifndef store
-#define store
+#ifndef shop_h
+#define shop_h
 #include <iostream>
 #include <clocale>
 #include <cstdlib>
