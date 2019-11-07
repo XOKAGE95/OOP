@@ -10,18 +10,14 @@
 #include "Film.cpp"
 #include "shop.cpp"
 
+void add_film (ifstream &file, shop &store) // Функция по добавлению фильма в магазин
+{
+    Film clip;
+    file >> clip;
+    store += clip;
+}
+
 using namespace std;
-
-
-/*
-Для своего варианта задания реализуйте операторные функции:
- проверки двух объектов основного класса на эквивалентность (operator==),
- вывода информации в поток ostream (operator<<),
- ввода данных из потока istream (operator>>),
- записи в файловый поток ofstream (operator<<),
- чтения из файлового потока ifstream (operator>>),
- добавления нового элемента в класс-контейнер (operator+=).
-*/
 
 int main()
 {
@@ -40,7 +36,7 @@ int main()
         file.get();
         shop film_store(NUMBER);
         for (int i = 0; i < NUMBER; i++)
-            film_store.add_film("file", file);
+            add_film(file, film_store);
         film_store.Display();
         film_store.Search_latest_film_of_author ();
         film_store.Search_good_film ();

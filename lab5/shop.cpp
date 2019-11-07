@@ -35,38 +35,12 @@ shop :: ~shop ()                                            // Деструкт�
     max_film_number = 0;
 }
 
-void shop :: add_film (string mode, ifstream &file)            // Добавление 1 фильма в магазин
-{
-    if (film_number < max_film_number)  // Проверка на свободное место
-    {
-        Film clip;
-        int count_f = 0;
-        if (mode == "file")
-            file >> clip;
-        else
-            cin >> clip;
-
-        for (int i = 0; i < film_number; i++)
-        {
-            if (clip != moves[i])
-                count_f ++;
-        }
-        if (count_f == film_number)
-        {
-            moves[film_number] = clip;
-            film_number ++;
-        }
-    }
-    else
-        cout << "Sorry, cant add films" << endl;
-
-}
 
 void shop :: Display()                                      // Показ всех фильмов
 {
     Definition ();
     for (int i = 0; i < film_number; i++)
-        cout << moves[i];                           // Показ i фильма
+        cout << moves[i];                           // Показ i фильмов
 }
 
 void shop :: Search_good_film ()                           // Задание 1
@@ -92,7 +66,7 @@ void shop :: Search_good_film ()                           // Задание 1
 }
 
 
-void shop :: Search_latest_film_of_author ()
+void shop :: Search_latest_film_of_author () // Задание 2
 {
     cout << "Enter author: ";
     string author;
@@ -116,7 +90,7 @@ void shop :: Search_latest_film_of_author ()
         cout << "Didn't find author" << endl;
 }
 
-void shop :: delete_film(string name)
+void shop :: delete_film(string name) // Удаление фильма
 {
     int count_i = -1;
     for (int i = 0; i < film_number && count_i == -1; i++)
@@ -144,3 +118,13 @@ void shop :: delete_film(string name)
         cout << "Didn't find this film\n";
 }
 
+void shop :: operator+=(Film clip) //Добавление фильма
+{
+    if (film_number < max_film_number)
+    {
+        moves[film_number] = clip;
+        film_number ++;
+    }
+    else cout << "Sorry, can't add film";
+
+}

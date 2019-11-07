@@ -24,6 +24,7 @@ public:
     void Display();
     void Definition();
     void delete_film(string name);
+    void operator+= (Film clip);
 };
 
 
