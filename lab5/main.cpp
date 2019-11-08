@@ -10,7 +10,7 @@
 #include "Film.cpp"
 #include "shop.cpp"
 
-void add_film (ifstream &file, shop &store) // Ğ¤ÑƒĞ½ĞºÑ†Ğ¸Ñ Ğ¿Ğ¾ Ğ´Ğ¾Ğ±Ğ°Ğ²Ğ»ĞµĞ½Ğ¸Ñ Ñ„Ğ¸Ğ»ÑŒĞ¼Ğ° Ğ² Ğ¼Ğ°Ğ³Ğ°Ğ·Ğ¸Ğ½
+void add_film (ifstream &file, shop &store) // Ôóíêöèÿ ïî äîáàâëåíèş ôèëüìà â ìàãàçèí
 {
     Film clip;
     file >> clip;
@@ -59,4 +59,3 @@ int main()
         return 0;
     }
 }
-

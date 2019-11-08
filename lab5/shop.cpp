@@ -19,16 +19,16 @@ void shop :: Definition()
     cout << setw(5) << left << "IMDb" << endl << endl << endl;
 }
 
-shop :: shop (unsigned int MAX) // ÐšÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ ÐºÐ»Ð°ÑÑÐ° shop;
+shop :: shop (unsigned int MAX) // Êîíñòðóêòîð êëàññà shop;
 {
-    max_film_number = MAX;                                  // ÐœÐ°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ð¾Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ„Ð¸Ð»ÑŒÐ¼Ð¾Ð²
-    moves = new Film[max_film_number];                      // ÐœÐ°ÑÑÐ¸Ð² Ð´Ð»Ñ Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ Ñ„Ð¸Ð»ÑŒÐ¼Ð¾Ð²
-    film_number = 0;                                        // ÑÑ‚Ð¾ Ð¿Ñ€Ð¾ÑÑ‚Ð¾ ÑÑ‡ÐµÑ‚Ñ‡Ð¸Ðº Ð°ÐºÑ‚ÑƒÐ°Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ñ„Ð¸Ð»ÑŒÐ¼Ð°
+    max_film_number = MAX;                                  // Ìàêñèìàëüíîå êîëè÷åñòâî ôèëüìîâ
+    moves = new Film[max_film_number];                      // Ìàññèâ äëÿ õðàíåíèÿ ôèëüìîâ
+    film_number = 0;                                        // ýòî ïðîñòî ñ÷åò÷èê àêòóàëüíîãî ôèëüìà
 
 
 }
 
-shop :: ~shop ()                                            // Ð”ÐµÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€
+shop :: ~shop ()                                            // Äåñòðóêòîð
 {
     delete[] moves;
     film_number = 0;
@@ -36,14 +36,14 @@ shop :: ~shop ()                                            // Ð”ÐµÑÑ‚Ñ€ÑƒÐºÑ‚Ð
 }
 
 
-void shop :: Display()                                      // ÐŸÐ¾ÐºÐ°Ð· Ð²ÑÐµÑ… Ñ„Ð¸Ð»ÑŒÐ¼Ð¾Ð²
+void shop :: Display()                                      // Ïîêàç âñåõ ôèëüìîâ
 {
     Definition ();
     for (int i = 0; i < film_number; i++)
-        cout << moves[i];                           // ÐŸÐ¾ÐºÐ°Ð· i Ñ„Ð¸Ð»ÑŒÐ¼Ð¾Ð²
+        cout << moves[i];                           // Ïîêàç i ôèëüìîâ
 }
 
-void shop :: Search_good_film ()                           // Ð—Ð°Ð´Ð°Ð½Ð¸Ðµ 1
+void shop :: Search_good_film ()                           // Çàäàíèå 1
 {
     cout << "Enter genre: ";
     string genre;
@@ -66,7 +66,7 @@ void shop :: Search_good_film ()                           // Ð—Ð°Ð´Ð°Ð½Ð¸Ðµ 1
 }
 
 
-void shop :: Search_latest_film_of_author () // Ð—Ð°Ð´Ð°Ð½Ð¸Ðµ 2
+void shop :: Search_latest_film_of_author () // Çàäàíèå 2
 {
     cout << "Enter author: ";
     string author;
@@ -90,7 +90,7 @@ void shop :: Search_latest_film_of_author () // Ð—Ð°Ð´Ð°Ð½Ð¸Ðµ 2
         cout << "Didn't find author" << endl;
 }
 
-void shop :: delete_film(string name) // Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ Ñ„Ð¸Ð»ÑŒÐ¼Ð°
+void shop :: delete_film(string name) // Óäàëåíèå ôèëüìà
 {
     int count_i = -1;
     for (int i = 0; i < film_number && count_i == -1; i++)
@@ -118,7 +118,7 @@ void shop :: delete_film(string name) // Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ Ñ„Ð¸Ð»ÑŒÐ¼Ð°
         cout << "Didn't find this film\n";
 }
 
-void shop :: operator+=(Film clip) //Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ñ„Ð¸Ð»ÑŒÐ¼Ð°
+void shop :: operator+=(Film clip) //Äîáàâëåíèå ôèëüìà
 {
     if (film_number < max_film_number)
     {
