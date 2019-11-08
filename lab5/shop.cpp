@@ -9,26 +9,16 @@
 #include "shop.h"
 using namespace std;
 
-void shop :: Definition()
+shop :: shop (unsigned int MAX) // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєР»Р°СЃСЃР° shop;
 {
-    cout << setw(30) << left << "Title";
-    cout << setw(20) << left << "Author";
-    cout << setw(30) << left << "Genre";
-    cout << setw(10) << left << "Year";
-    cout << setw(10) << left << "Duration";
-    cout << setw(5) << left << "IMDb" << endl << endl << endl;
-}
-
-shop :: shop (unsigned int MAX) // Конструктор класса shop;
-{
-    max_film_number = MAX;                                  // Максимальное количество фильмов
-    moves = new Film[max_film_number];                      // Массив для хранения фильмов
-    film_number = 0;                                        // это просто счетчик актуального фильма
+    max_film_number = MAX;                                  // РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ С„РёР»СЊРјРѕРІ
+    moves = new Film[max_film_number];                      // РњР°СЃСЃРёРІ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ С„РёР»СЊРјРѕРІ
+    film_number = 0;                                        // СЌС‚Рѕ РїСЂРѕСЃС‚Рѕ СЃС‡РµС‚С‡РёРє Р°РєС‚СѓР°Р»СЊРЅРѕРіРѕ С„РёР»СЊРјР°
 
 
 }
 
-shop :: ~shop ()                                            // Деструктор
+shop :: ~shop ()                                            // Р”РµСЃС‚СЂСѓРєС‚РѕСЂ
 {
     delete[] moves;
     film_number = 0;
@@ -36,14 +26,14 @@ shop :: ~shop ()                                            // Деструктор
 }
 
 
-void shop :: Display()                                      // Показ всех фильмов
+void shop :: Display()                                      // РџРѕРєР°Р· РІСЃРµС… С„РёР»СЊРјРѕРІ
 {
     Definition ();
     for (int i = 0; i < film_number; i++)
-        cout << moves[i];                           // Показ i фильмов
+        cout << moves[i];                           // РџРѕРєР°Р· i С„РёР»СЊРјРѕРІ
 }
 
-void shop :: Search_good_film ()                           // Задание 1
+void shop :: Search_good_film ()                           // Р—Р°РґР°РЅРёРµ 1
 {
     cout << "Enter genre: ";
     string genre;
@@ -55,7 +45,7 @@ void shop :: Search_good_film ()                           // Задание 1
     int film_count = 0;
     for (int i = 0; i < film_number; i++)
     {
-        if ((moves[i].comparison_Genre(genre) != 0) && (moves[i].get_IMDb() >= rating))
+        if (moves[i].comparison_Genre(genre) && (moves[i].get_IMDb() >= rating))
         {
             film_count++;
             cout << moves[i];
@@ -66,7 +56,7 @@ void shop :: Search_good_film ()                           // Задание 1
 }
 
 
-void shop :: Search_latest_film_of_author () // Задание 2
+void shop :: Search_latest_film_of_author () // Р—Р°РґР°РЅРёРµ 2
 {
     cout << "Enter author: ";
     string author;
@@ -83,14 +73,12 @@ void shop :: Search_latest_film_of_author () // Задание 2
 
     }
     if (film_count >= 0)
-    {
         cout << moves[film_count];
-    }
     else
         cout << "Didn't find author" << endl;
 }
 
-void shop :: delete_film(string name) // Удаление фильма
+void shop :: delete_film(string name) // РЈРґР°Р»РµРЅРёРµ С„РёР»СЊРјР°
 {
     int count_i = -1;
     for (int i = 0; i < film_number && count_i == -1; i++)
@@ -105,20 +93,22 @@ void shop :: delete_film(string name) // Удаление фильма
         cout << "This film was delete:\n";
         cout << moves[count_i];
         for (int i= count_i; i < (film_number - 1); i++)
-        {
             moves[i] = moves[i+1];
-        }
         film_number --;
-
-
-
     }
 
     else
         cout << "Didn't find this film\n";
 }
 
-void shop :: operator+=(Film clip) //Добавление фильма
+void shop :: add_film(istream &file)
+{
+    Film clip;
+	file >> clip;
+	operator+= (clip);
+}
+
+void shop :: operator+=(Film clip) //Р”РѕР±Р°РІР»РµРЅРёРµ С„РёР»СЊРјР°
 {
     if (film_number < max_film_number)
     {
@@ -127,4 +117,14 @@ void shop :: operator+=(Film clip) //Добавление фильма
     }
     else cout << "Sorry, can't add film";
 
+}
+
+void shop :: Definition()
+{
+    cout << setw(30) << left << "Title";
+    cout << setw(20) << left << "Author";
+    cout << setw(30) << left << "Genre";
+    cout << setw(10) << left << "Year";
+    cout << setw(10) << left << "Duration";
+    cout << setw(5) << left << "IMDb" << endl << endl << endl;
 }

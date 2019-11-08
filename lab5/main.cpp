@@ -10,13 +10,6 @@
 #include "Film.cpp"
 #include "shop.cpp"
 
-void add_film (ifstream &file, shop &store) // Функция по добавлению фильма в магазин
-{
-    Film clip;
-    file >> clip;
-    store += clip;
-}
-
 using namespace std;
 
 int main()
@@ -36,7 +29,7 @@ int main()
         file.get();
         shop film_store(NUMBER);
         for (int i = 0; i < NUMBER; i++)
-            add_film(file, film_store);
+            film_store.add_film(file);
         film_store.Display();
         film_store.Search_latest_film_of_author ();
         film_store.Search_good_film ();
@@ -59,3 +52,4 @@ int main()
         return 0;
     }
 }
+

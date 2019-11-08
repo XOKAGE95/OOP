@@ -20,7 +20,7 @@ public:
     ~shop ();
     void Search_good_film ();
     void Search_latest_film_of_author ();
-    void add_film (string mode, ifstream &file);
+    void add_film (istream&);
     void Display();
     void Definition();
     void delete_film(string name);
