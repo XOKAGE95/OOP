@@ -96,6 +96,17 @@ bool operator!= (Film movie1, Film movie2)
         return !(operator== (movie1, movie2));
 }
 
+serial :: serial(string TitleS, string AuthorS, string GenreS, int YearS, int DurationS, float IMDbS, int seriesS)
+{
+	Title = TitleS;
+	Author = AuthorS;
+	Genre = GenreS;
+	Year = YearS;
+	Duration = DurationS;
+	IMDb = IMDbS;
+	series = seriesS;
+
+}
 ostream& operator<< (ostream &file, serial sitcom)
 {
     file << static_cast<Film>(sitcom);

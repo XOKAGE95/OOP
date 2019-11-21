@@ -40,6 +40,8 @@ class serial : public Film
 private:
 	int series;
 public:
+	serial(): Title(""), Author(""), Genre(""), Year(0), Duration(0), IMDb(0), series(0) {};
+	serial(string, string, string, int, int, float, int);
 	friend istream& operator>> (istream &file, serial &sitcom);
     friend ostream& operator<< (ostream &file, serial sitcom);
     friend bool operator== (serial sitcom1, serial sitcom2);
