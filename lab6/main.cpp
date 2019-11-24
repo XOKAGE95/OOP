@@ -7,14 +7,13 @@
 #include <string>
 #include "Film.h"
 #include "shop.h"
-#include "Film.cpp"
-#include "shop.cpp"
-
+#include "serial.h"
 using namespace std;
+
 
 int main()
 {
-    int NUMBER;
+    int NUMBERF, NUMBERS;
     ifstream file_movie;
     ifstream file_serial;
     file_movie.open("Film.txt");
@@ -27,36 +26,89 @@ int main()
     else
     {
 
-        file_movie >> NUMBER;
+        file_movie >> NUMBERF;
         file_movie.get();
         shop film_store(50);
-        for (int i = 0; i < NUMBER; i++)
+        for (int i = 0; i < NUMBERF; i++)
             film_store.add_film(file_movie);
-        NUMBER = 0;
-        file_serial >> NUMBER;
+        file_movie.close();
+        file_serial >> NUMBERS;
         file_serial.get();
-        for (int i = 0; i < NUMBER; i++)
+        for (int i = 0; i < NUMBERS; i++)
             film_store.add_serial(file_serial);
+        file_serial.close();
+        film_store.Display();
+        string ask;
+        cout << "Want you add any film or serial?\n";
+        getline(cin, ask);
+        while (ask == "yes" || ask == "Yes")
+        {
+            cout << "What you want add, film or serial?\n";
+            string name;
+            getline(cin, name);
+            if (name == "film" || name == "Film")
+            {
+                NUMBERF ++;
+                Film clip;
+                cout << "Write Title, Author, Genre, Year, Duration, IMDb\n";
+                cin >> clip;
+                film_store += clip;
+            }
+            else if (name == "serial" || name == "Serial")
+            {
+                NUMBERS++;
+                Serial clip;
+                cout << "Write Title, Author, Genre, Year, Duration, IMDb, Episodes\n";
+                cin >> clip;
+                film_store += clip;
+            }
+            else
+            {
+                ask == "yes";
+                continue;
+            }
+            cout << "Want you add any film or serial?\n";
+            getline(cin, ask);
+        }
+
+
+        cout << "Want you delete any film?\n";
+        getline(cin, ask);
+        while (ask == "yes" || ask == "Yes")
+        {
+            cout << "What you want to delete, Film or serial?\n";
+            string name;
+            getline(cin, name);
+            if (name == "Film" || name == "film")
+            {
+                cout << "Which film you want to delete?\n";
+                string FilmName;
+                getline (cin, FilmName);
+                film_store.delete_film(FilmName);
+                NUMBERF --;
+
+            }
+            else if (name == "Serial" || name == "serial")
+            {
+                cout << "Which serial you want to delete?\n";
+                string SerialName;
+                getline(cin, SerialName);
+                film_store.delete_serial(SerialName);
+                NUMBERS--;
+            }
+            else
+            {
+                ask = "yes";
+                continue;
+            }
+            cout << "Want you delete any film?\n";
+            getline (cin, ask);
+
+        }
         film_store.Display();
         film_store.Search_latest_film_of_author ();
         film_store.Search_good_film ();
-        cout << "Want you delete any film?\n";
-        string ask;
-        getline(cin, ask);
-        while (ask == "yes")
-        {
-            cout << "Which film you want to delete?\n";
-            string name;
-            getline(cin, name);
-            film_store.delete_film(name);
-            cout << "Want you delete any film?\n";
-            cin >> ask;
-
-        }
-
-        film_store.Display();
-        file_movie.close();
-        file_serial.close();
+        film_store.make_file(NUMBERF, NUMBERS);
         return 0;
     }
 }

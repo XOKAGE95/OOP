@@ -7,9 +7,8 @@
 #include <fstream>
 #include <iomanip>
 #include <string>
-
-
 #include "Film.h"
+#include "serial.h"
 using namespace std;
 class shop
 {
@@ -18,7 +17,7 @@ private:
     unsigned int film_number;
     unsigned int serial_number;
     Film *movies;
-    serial *series;
+    Serial *series;
 public:
     shop (unsigned int);
     ~shop ();
@@ -29,8 +28,10 @@ public:
     void Display();
     void Definition();
     void delete_film(string);
+    void delete_serial(string);
     void operator+= (Film);
-    void operator+= (serial);
+    void operator+= (Serial);
+    void make_file(int, int);
 };
 
 

@@ -8,22 +8,27 @@
 #include "Film.h"
 using namespace std;
 
-
+Film :: Film(string TitleF, string AuthorF, string GenreF,int YearF, int DurationF, float IMDbF)
+{
+    Title = TitleF;
+    Author = AuthorF;
+    Genre = GenreF;
+    Year = YearF;
+    Duration = DurationF;
+    IMDb = IMDbF;
+}
 string Film :: get_Genre()
 {
     return Genre;
 }
-
 float Film :: get_IMDb()
 {
     return IMDb;
 }
-
 string Film :: get_Author()
 {
     return Author;
 }
-
 int Film :: get_Year()
 {
     return Year;
@@ -35,17 +40,17 @@ string Film :: get_Title()
 bool Film :: comparison_Genre(string genre)
 {
     return
-    	(((genres[0] == genre) && (genres[0] != "\0"))
-    || 	((genres[1] == genre) && (genres[1] != "\0"))
-    || 	((genres[2] == genre) && (genres[2] != "\0")));
+        (       ((genres[0] == genre) && (genres[0] != "\0"))
+         || 	((genres[1] == genre) && (genres[1] != "\0"))
+         || 	((genres[2] == genre) && (genres[2] != "\0"))
+        );
 }
-
 istream& operator>> (istream &file, Film &movie)
 {
     getline(file, movie.Title);
     getline (file, movie.Author);
     getline (file, movie.Genre);
-   	file >> movie.Year;
+    file >> movie.Year;
     file.ignore(255, '\n');
     file >> movie.Duration;
     file.ignore(255, '\n');
@@ -53,14 +58,15 @@ istream& operator>> (istream &file, Film &movie)
     file.ignore(255, '\n');
     int o = 0;
     movie.genres = new string[3];
-    for (int i = 0; i < movie.Genre.length(); i++)
+    for (unsigned int i = 0; i < movie.Genre.length(); i++)
     {
         if (movie.Genre[i] == ' ')
         {
             o++;
             continue;
         }
-        else movie.genres[o] += movie.Genre[i];
+        else
+            movie.genres[o] += movie.Genre[i];
     }
     return file;
 }
@@ -74,14 +80,21 @@ ostream& operator<< (ostream &file, Film movie)
     file << setw(10) << left << movie.Year;
     file << setw(10) << left << movie.Duration;
     file << setw(5) << left << movie.IMDb;
-
-
+    return file;
 }
-
+void Film :: Enter_file(ofstream &file)
+{
+    file << Title << endl;
+    file << Author << endl;
+    file << Genre << endl;
+    file << Year << endl;
+    file << Duration << endl;
+    file << IMDb << endl;
+}
 bool operator== (Film movie1, Film movie2)
 {
-        return
-            ((movie1.Title == movie2.Title)
+    return
+        ((movie1.Title == movie2.Title)
          && (movie1.Author == movie2.Author)
          && (movie1.genres[0] == movie2.genres[0])
          && (movie1.genres[1] == movie2.genres[1])
@@ -93,39 +106,6 @@ bool operator== (Film movie1, Film movie2)
 
 bool operator!= (Film movie1, Film movie2)
 {
-        return !(operator== (movie1, movie2));
+    return !(operator== (movie1, movie2));
 }
 
-serial :: serial(string TitleS, string AuthorS, string GenreS, int YearS, int DurationS, float IMDbS, int seriesS)
-{
-	Title = TitleS;
-	Author = AuthorS;
-	Genre = GenreS;
-	Year = YearS;
-	Duration = DurationS;
-	IMDb = IMDbS;
-	series = seriesS;
-
-}
-ostream& operator<< (ostream &file, serial sitcom)
-{
-    file << static_cast<Film>(sitcom);
-    file << sitcom.series;
-}
-
-istream& operator>> (istream &file, serial &sitcom)
-{
-    file >> static_cast<Film&>(sitcom);
-    file >> sitcom.series;
-    file.ignore(255, '\n');
-}
-
-bool operator== (serial sitcom1, serial sitcom2)
-{
-        return ((operator==(static_cast<const Film>(sitcom1), static_cast<const Film>(sitcom2))) && sitcom1.series == sitcom2.series);
-}
-
-bool operator!= (serial sitcom1, serial sitcom2)
-{
-        return !(operator== (sitcom1, sitcom2));
-}
