@@ -8,8 +8,8 @@
 #include "serial.h"
 
 Serial :: Serial(string TitleS, string AuthorS, string GenreS, int YearS, int DurationS, float IMDbS, int seriesS)
+:Film(TitleS, AuthorS, GenreS, YearS, DurationS, IMDbS)
 {
-    Film(TitleS, AuthorS, GenreS, YearS, DurationS, IMDbS);
     series = seriesS;
 }
 ostream& operator<< (ostream &file, Serial sitcom)
