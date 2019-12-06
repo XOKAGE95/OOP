@@ -89,29 +89,56 @@ void shop :: Search_latest_film_of_author () // Задание 2
     cout << "Enter author: ";
     string author;
     getline (cin, author);
-    int year = -1;
+    int film_year = -1;
+    int serial_year = -1;
     int film_count = -1;
+    int serial_count = -1;
     for (unsigned int i = 0; i < film_number; i++)
     {
         if
         (
             (movies[i].get_Author() == author)
-            && (movies[i].get_Year() >= year)
+            && (movies[i].get_Year() >= film_year)
         )
         {
             film_count = i;
-            year = movies[i].get_Year();
+            film_year = movies[i].get_Year();
         }
 
 
     }
-    if (film_count >= 0)
-        cout << movies[film_count] << endl;
+
+    for (unsigned int i = 0; i < serial_number; i++)
+    {
+        if
+        (
+            (series[i].get_Author() == author)
+            && (series[i].get_Year() >= serial_year)
+        )
+        {
+            serial_count = i;
+            serial_year = series[i].get_Year();
+        }
+
+
+    }
+    if (film_count >= 0 || serial_count >= 0)
+    {
+        if (serial_year == film_year)
+        {
+            cout << series[serial_number] << endl;
+            cout << movies[film_count] << endl;
+        }
+        else if (serial_year > film_year)
+            cout << series[serial_count] << endl;
+        else
+            cout << movies[film_count] << endl;
+    }
     else
         cout << "Didn't find author" << endl;
 }
 
-void shop :: delete_film(string name) // Удаление Фильма
+void shop :: delete_film(string name, bool* leg) // Удаление Фильма
 {
     int count_i = -1;
     for (unsigned int i = 0; i < film_number && count_i == -1; i++)
@@ -132,6 +159,7 @@ void shop :: delete_film(string name) // Удаление Фильма
             for (unsigned int i= count_i; i < (film_number - 1); i++)
                 movies[i] = movies[i+1];
             film_number --;
+            *leg = true;
         }
         else
             return;
@@ -140,7 +168,7 @@ void shop :: delete_film(string name) // Удаление Фильма
     else
         cout << "Didn't find this film\n";
 }
-void shop :: delete_serial(string name) // Удаление Сериала
+void shop :: delete_serial(string name, bool* leg) // Удаление Сериала
 {
     int count_i = -1;
     for (unsigned int i = 0; i < serial_number && count_i == -1; i++)
@@ -161,6 +189,7 @@ void shop :: delete_serial(string name) // Удаление Сериала
             for (unsigned int i= count_i; i < (serial_number - 1); i++)
                 series[i] = series[i+1];
             serial_number --;
+            *leg = true;
         }
         else
             return;
@@ -211,14 +240,30 @@ void shop :: make_file(int NUMBERF, int NUMBERS)
 {
     ofstream file;
     file.open("Film.txt");
+    if (!file)
+    {
+        cout << "Can't find file!";
+        return;
+    }
+    else
+    {
     file << NUMBERF << endl;
     for(int i = 0; i < NUMBERF; i++)
         movies[i].Enter_file(file);
+    }
     file.close();
     file.open("Serial.txt");
+    if (!file)
+    {
+        cout << "Can't find file!";
+        return;
+    }
+    else
+    {
     file << NUMBERS << endl;
     for(int i = 0; i < NUMBERS; i++)
         series[i].Enter_file(file);
+    }
     file.close();
 }
 void shop :: Definition()
@@ -230,4 +275,3 @@ void shop :: Definition()
     cout << setw(10) << left << "Duration";
     cout << setw(5)  << left << "IMDb";
 }
-
