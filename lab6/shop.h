@@ -27,8 +27,8 @@ public:
     void add_serial(istream&);
     void Display();
     void Definition();
-    void delete_film(string);
-    void delete_serial(string);
+    void delete_film(string, bool*);
+    void delete_serial(string, bool*);
     void operator+= (Film);
     void operator+= (Serial);
     void make_file(int, int);

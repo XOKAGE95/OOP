@@ -76,6 +76,7 @@ int main()
         getline(cin, ask);
         while (ask == "yes" || ask == "Yes")
         {
+            bool leg = false;
             cout << "What you want to delete, Film or serial?\n";
             string name;
             getline(cin, name);
@@ -84,8 +85,9 @@ int main()
                 cout << "Which film you want to delete?\n";
                 string FilmName;
                 getline (cin, FilmName);
-                film_store.delete_film(FilmName);
-                NUMBERF --;
+                film_store.delete_film(FilmName, &leg);
+                if (leg == true)
+                    NUMBERF --;
 
             }
             else if (name == "Serial" || name == "serial")
@@ -93,8 +95,9 @@ int main()
                 cout << "Which serial you want to delete?\n";
                 string SerialName;
                 getline(cin, SerialName);
-                film_store.delete_serial(SerialName);
-                NUMBERS--;
+                film_store.delete_serial(SerialName, &leg);
+                if (leg == true)
+                    NUMBERS--;
             }
             else
             {
@@ -112,4 +115,3 @@ int main()
         return 0;
     }
 }
-
