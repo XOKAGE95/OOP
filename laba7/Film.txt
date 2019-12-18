@@ -1,0 +1,138 @@
+Film
+Na rayone
+Olya Zueva
+Biography Drama Thriller
+2018
+97
+2.7
+Film
+Foto na pamyat
+Anton Zenkovich
+Horror Thriller 
+2018
+80
+3
+Film
+Dvizhenie vverkh
+Anton Megerdichev
+Drama Sport 
+2018
+133
+6.6
+Film
+Yolki 5
+Timur Bekmambetov
+Comedy  
+2017
+88
+3.6
+Film
+Joker
+Todd Phillips
+Crime Drama Thriller
+2019
+122
+8.8
+Film
+Due Date
+Todd Phillips
+Adventure Comedy 
+2010
+95
+6.5
+Film
+Old School
+Todd Phillips
+Comedy  
+2003
+88
+7.1
+Film
+The Hangover
+Todd Phillips
+Comedy  
+2009
+100
+7.7
+Film
+Captain Marvel
+Anna Boden
+Action Adventure Sci-Fi
+2019
+123
+7
+Film
+Pulp Fiction
+Quentin Tarantino
+Crime Drama 
+1994
+154
+8.9
+Film
+Once Upon a Time in Hollywood
+Quentin Tarantino
+Comedy Drama 
+2019
+161
+8
+Film
+The Hateful Eight
+Quentin Tarantino
+Crime Drama Mystery
+2015
+168
+7.8
+Film
+Django Unchained
+Quentin Tarantino
+Drama Western 
+2012
+165
+8.4
+Film
+Inglourious Basterds
+Quentin Tarantino
+Adventure Drama War
+2009
+153
+8.3
+Film
+Avengers: Endgame
+Anthony Russo
+Action Adventure Sci-Fi
+2018
+181
+8.5
+Serial
+The Flash
+Greg Berlanti
+Action Adventure Drama
+2014
+43
+7.8
+125
+Serial
+Mr. Robot
+Sam Esmail
+Crime Drama Thriller
+2015
+49
+8.5
+46
+Serial
+Why Women Kill
+Marc Cherry
+Crime Drama Comedy
+2019
+45
+8.2
+11
+TV
+Han Solo: A Smuggler's Trade
+Keith Allen
+Short Action Sci-Fi
+2016
+14
+7
+STS
+22:00
